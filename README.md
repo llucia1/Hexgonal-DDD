@@ -31,22 +31,39 @@ Descargar el codigo y sobreescribir.
 ## 
 Desde la raiz de la instalacion Laravel, arranque la app con artisan: php artisan serve y se abrira por defecto el puerto 8000
 Rutas:
+
     http://localhost:8000
+
+    API
+
     GET    http://localhost:8000/api/posts
+
     GET    http://localhost:8000/api/posts/{id}
+
     POST   http://localhost:8000/api/
 
+
 Invoke-WebRequest -Uri "http://127.0.0.1:8000/api/posts" -Method POST -Body '{userId: 1, title: Test title, body: Test body }' -Headers $headers
+
 curl -d '{userId: 1, title: Test title, body: Test body }' -H "Content-Type: application/json" -X POST http://127.0.0.1:8000/api/posts
 
 ## 
 Arquitectura Hexagonal con modelado del dominio DDD.
 Basado en Aplications Services. 
+
 De cara al crecimiento de la aplicacion, se pueden envolver las aplications services en un commandBus con los beneficios que nos aportan. Por ejemplo, podemos ver sus beneficios en: https://tactician.thephpleague.com/
+
 Tampoco hay implementado un EventsBus, a pesar de que no se necesita por los requisitos solictados. Pero si es a tener en cuenta de cara al crecimeinto.
+
 He creado un manejador de Exceptions, teniendo un control sobre ellas. Cuando se lanza una exception se puede redirecionar a pagina de error, o un componente vue o donde se vea conveniente.
 
-En cuanto al Front, no he creado una factoria para consumir la APi, sino que directamente sobre la url. Ni tampoco un arbol de componentes vue.
+En cuanto al Front, no he creado una factoria para consumir la APi, sino que directamente sobre la url con axios. Ni tampoco un arbol de componentes vue.
+
+Organice el codigo como consideres necesario. Pudiendo tener un servicio para Backend y otro para Front, haciendo solicitudes para el consumo de la API.
+
+
+
+
 
 
 ## Version
