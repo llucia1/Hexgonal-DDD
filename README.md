@@ -28,6 +28,15 @@ Descargar el codigo y sobreescribir.
  - Ejecutar en la linea de comandos de tu sistema: composer dump-autoload
  - npm run dev
 
+ Instalar Swagger
+ - composer require darkaonline/l5-swagger
+ Agregar en el fichero config/app.php, dentro del array de 'providers':
+    L5Swagger\L5SwaggerServiceProvider::class,
+ Y tambien: 'debug' => env('APP_DEBUG', true),
+ Antes de generar el json de Swagger se recomienda primero ejecutar el fichero: limpiarCache.bat 
+ y a continuacion ejecutar:
+ php artisan l5-swagger:generate
+
 ## 
 Desde la raiz de la instalacion Laravel, arranque la app con artisan: php artisan serve y se abrira por defecto el puerto 8000
 Rutas:
@@ -46,6 +55,8 @@ Rutas:
 Invoke-WebRequest -Uri "http://127.0.0.1:8000/api/posts" -Method POST -Body '{userId: 1, title: Test title, body: Test body }' -Headers $headers
 
 curl -d '{userId: 1, title: Test title, body: Test body }' -H "Content-Type: application/json" -X POST http://127.0.0.1:8000/api/posts
+
+
 
 ## 
 Arquitectura Hexagonal con modelado del dominio DDD.
