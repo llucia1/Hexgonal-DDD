@@ -32,7 +32,7 @@ class PostRequest extends FormRequest
         return [
             'userId.required' => 'The :attribute Id must be required.',
             'userId.integer' => 'The :attribute Id must be valid.',
-            'userId.required' => 'The :attribute Id must be required.',
+            'title.required' => 'The :attribute must be required.',
             'title.string' => 'The :attribute must be a string of characters.',
             'body.string' => 'The :attribute must be a string of characters.',
             'body.required' => 'The :attribute Id must be required.',
