@@ -5,6 +5,9 @@ namespace Tests\Unit;
 use PHPUnit\Framework\TestCase;
 use Src\Post\Domain\Post;
 use Src\Post\Domain\PostCollection;
+use Src\User\Domain\Adress;
+use Src\User\Domain\Company;
+use Src\User\Domain\Geo;
 use Src\User\Domain\User;
 
 class youCanCreatePostsAndUsersTest extends TestCase
@@ -85,10 +88,20 @@ class youCanCreatePostsAndUsersTest extends TestCase
                 'name' => 'user1',
                 'username' => 'Bret',
                 'email' => 'Sincere@april.biz',
-                'address' => [],
+                'address' => [
+                    'street' => 'strert test',
+                    'suite' => 'suite test',
+                    'city' => 'city test',
+                    'zipcode' => 'zipcode test',
+                    'geo' => [],
+                ],
                 'phone' => '1-7788',
                 'website' => 'hildegard.org',
-                'company' => []
+                'company' => [
+                                'bs' => 'test',
+                                'catchPhrase' => 'test',
+                                'name' => 'test',
+                    ]
                 ]
             ];
             $user = Post::create([]);
@@ -127,7 +140,7 @@ class youCanCreatePostsAndUsersTest extends TestCase
             ];
 
 
-        $user = User::create($userFake);
+        $user = User::fromArray($userFake);
         $this->assertInstanceOf(User::class, $user);
         $this->assertNotNull($user);
         
@@ -148,8 +161,8 @@ class youCanCreatePostsAndUsersTest extends TestCase
         $this->assertEquals('1-7788', $user->phone());
         $this->assertEquals('hildegard.org', $user->website());
 
-        $this->assertIsArray($user->address());
-        $this->assertIsArray($user->company());
+        $this->assertNull( $user->address() );
+        $this->assertNull( $user->company() );
 
 
     }
@@ -163,8 +176,25 @@ class youCanCreatePostsAndUsersTest extends TestCase
 
     public function test_return_null_if_the_array_is_empty_when_a_user_is_created(): void
     {
-            $user = User::create([]);
+            $user = User::fromArray([]);
             $this->assertNull($user);
     }
 
+    public function test_return_null_if_the_array_is_empty_when_a_address_is_created(): void
+    {
+            $user = Adress::fromArray([]);
+            $this->assertNull($user);
+    }
+
+    public function test_return_null_if_the_array_is_empty_when_a_company_is_created(): void
+    {
+            $user = Company::fromArray([]);
+            $this->assertNull($user);
+    }    
+
+    public function test_return_null_if_the_array_is_empty_when_a_geo_is_created(): void
+    {
+            $user = Geo::fromArray([]);
+            $this->assertNull($user);
+    }       
 }

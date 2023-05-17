@@ -17,7 +17,7 @@ class youCanGetAllPostTest extends TestCase
     }
 
 
-    public function testExecuteReturnsArrayOfPosts(): void
+    public function testGetAllPostsService(): void
     {
         $ArrayPost = [
             [

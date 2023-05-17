@@ -8,12 +8,13 @@ use Src\User\Domain\User;
 final class Post
 {
     public ?User $user = null;
-    public function __construct(public string $userId, public string $id, public string $title, public string $body )
+    public function __construct(public string $userId, public string $id, public string $title, public string $body, ?array $user = [] )
     {
         $this->userId = new Id($userId);
         $this->id = new Id($id);
         $this->title = new Stringvo($title);
         $this->body = new Stringvo($body);
+        $this->user = User::fromArray($user);
     }
 
     public function userId(): string
@@ -54,7 +55,7 @@ final class Post
     public function addUserFromArray(?array $user): void
     {
         if ( $this->userId() === strval($user['id']) )
-            $this->addUser( new User($user['id'], $user['name'], $user['username'], $user['email'], $user['address'], $user['phone'], $user['website'], $user['company']) );
+            $this->addUser( User::fromArray($user) );
         else
             $this->addUser(null);
     }

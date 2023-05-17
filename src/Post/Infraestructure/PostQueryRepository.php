@@ -15,7 +15,7 @@ class PostQueryRepository extends baseApiRepository implements PostQueryRepoCont
         parent::__construct( 'posts', $relation );
     }
 
-    public function findOrFail(string $id): ?Post
+    public function findOrFail(string $id): ?Post // El parametro puede ser tambien un Value Objet de id 
     {
         if ($id == null)
         {

@@ -21,7 +21,7 @@ final class PostCreateService
        if($user === null)
         throw new crearPostInBDException('The user does not exist. We cannot insert post in database.') ;
 
-       $uuid = $this->uuid();
+       $uuid = $this->uuid();// Creamos el uuid
        $this->postRepository->save( new Post( $datas['userId'], $uuid, $datas['title'], $datas['body']  ));
 
        return $uuid;// Este retorno es discutible ...   

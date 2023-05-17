@@ -17,7 +17,7 @@ class youCanGetOnePostTest extends TestCase
     }
 
 
-    public function testExecuteReturnsArrayOfPosts(): void
+    public function testGetOnePostsByIdService(): void
     {
 
         $postId = '1';

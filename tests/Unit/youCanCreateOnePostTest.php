@@ -21,7 +21,7 @@ class youCanCreateOnePostTest extends TestCase
     }
 
 
-    public function testExecuteReturnsArrayOfPosts(): void
+    public function testCreatePostService(): void
     {
 
         $datas = [
@@ -40,7 +40,7 @@ class youCanCreateOnePostTest extends TestCase
             'website' => 'hildegard.org',
             'company' => []
         ];
-        $userMock = User::create($userFake);
+        $userMock = User::fromArray($userFake);
         $userQueryRepositoryMock = Mockery::mock(UserQueryRepoContract::class);
         $userQueryRepositoryMock->shouldReceive('findOrFail')->with($datas['userId'])->andReturn($userMock);
 

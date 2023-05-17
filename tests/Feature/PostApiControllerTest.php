@@ -21,7 +21,7 @@ class PostApiControllerTest extends TestCase
 
 
 
-    public function test_all(): void
+    public function test_all_post(): void
     {
 
 
@@ -123,7 +123,7 @@ class PostApiControllerTest extends TestCase
     }
 
 
-    public function test_get(): void
+    public function test_get_post(): void
     {
 
         

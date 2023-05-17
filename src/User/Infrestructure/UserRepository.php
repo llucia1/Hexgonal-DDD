@@ -26,7 +26,7 @@ class UserRepository extends baseApiRepository implements UserQueryRepoContract
         if(empty($result))
             return null;
 
-        return User::create($result);        
+        return User::fromArray($result);        
     }
 
 }

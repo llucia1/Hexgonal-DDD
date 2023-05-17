@@ -18,6 +18,14 @@ class PostRepository extends baseApiRepository implements PostRepoContract
     {
         try {
             $this->persist($post);
+            /* 
+                Si fuera un model de Eloquent:
+                        $this->model->id = $post->id();
+                        $this->model->userId = $post->userId();
+                        $this->model->title = $post->title();
+                        $this->model->body = $post->body();
+                        $this->save($this->model);
+            */
         } catch (\Throwable $th) {
             throw new crearPostInBDException('Error when inserting a new Post in the Database.') ;
         }
