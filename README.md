@@ -131,12 +131,14 @@ Asi que al ejecutar los test:
        php artisan test
     
     
-Se ejecutaran los test de dichas libreriastambien. 
-El phpunit.xml esta configurado con sqlite, para no utilizar mysql.
+Se ejecutaran los test de dichas librerias tambien y se muestran errores de los test de dichas librerias. Es debidoa a que intentan acceder a la Base de datos. 
+Para testar la base de datos con Laravel como preferencia me gusta usar Sqlite en vez de mysql. 
+Teniendo un fichero para test con acceso a Sqlite tal y como esta configurado el phpunit.xml, y no utilizar mysql.
+A tener en cuenta que para ello se debe tener instalado Sqlite.
 
 
 
-Para ejecutar nuestros test en la carpeta 'src':
+- Para ejecutar nuestros test del codigo que hemos aportado:
 
  
     php artisan test --filter Unit 
