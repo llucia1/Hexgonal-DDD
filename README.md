@@ -28,8 +28,7 @@ Visualizacion y creacion de post.
        Tenemos que importar las librerias de componentes Vuetify y debemos agregar el plugin Vuetify a la funcion createInertiaApp.
        El fichero resources/js/app.ts nos debe de quedar de la siguiente forma que se muestra acontinuacion. Asi que Elimine ctr + Alt pulse supr para eliminar todo el code y copie y pegue lo siguiente:
 
-        import './bootstrap';
-import '../css/app.css';
+        import './bootstrap'; import '../css/app.css';
 
 import { createApp, h, DefineComponent } from 'vue';
 import { createInertiaApp } from '@inertiajs/vue3';
@@ -61,6 +60,7 @@ createInertiaApp({
         color: '#4B5563',
     },
 });
+
 
 
  - Ejecute el fichero limpiarCache.bat
