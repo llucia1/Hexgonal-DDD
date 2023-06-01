@@ -16,7 +16,8 @@ Visualizacion y creacion de post.
 
 
  - Al instalar las dependencias nos han sobreescrito los ficheros 'routes/web.php' y 'resources/js/app.ts'.
-   Ahora podemos actualizar el repositorio para que los ficheros web y app esten correctamente. O sino, se puede hacer manualmente:
+   Ahora podemos actualizar el repositorio para que los ficheros web y app esten correctamente. 
+   O sino, se puede hacer manualmente como muestro a continuacion:
  
     Editar routes/web.php   
     Agregar la ruta:
