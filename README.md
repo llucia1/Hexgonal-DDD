@@ -8,8 +8,9 @@ Visualizacion y creacion de post.
  - composer install
  - composer dump-autoload
  - php artisan key:generate
- - php artisan breeze:install 
-        * Seleccione o acepte instalar: Vue, typescript y phpunit(nos agrega tailwind) . El resto de opciones no instalar.
+ - php artisan breeze:install
+ 
+   * Seleccione o acepte instalar: Vue y typescript (nos agrega tailwind) . El resto de opciones no instalar.
  - npm install
 
  
