@@ -16,39 +16,51 @@ Visualizacion y creacion de post.
 
 
  - Al instalar las dependencias nos han sobreescrito los ficheros 'routes/web.php' y 'resources/js/app.ts'
+ 
     Editar routes/web.php
+ 
         agregar la ruta:
+ 
             Route::get('/posts', function () { return Inertia::render('posts'); });
+ 
 
     Editar resources/js/app.ts
-        Agregar el siguiente codigo:
+       Tenemos que importar las librerias de componentes Vuetify y debemos agregar el plugin Vuetify a la funcion createInertiaApp.
+       El fichero resources/js/app.ts nos debe de quedar de la siguiente forma que se muestra acontinuacion. Asi que Elimine ctr + Alt pulse supr para eliminar todo el code y copie y pegue lo siguiente:
 
-            // Vuetify
-        import 'vuetify/styles'
-        import { createVuetify } from 'vuetify'
-        import * as components from 'vuetify/components'
-        import * as directives from 'vuetify/directives'
+        import './bootstrap';
+import '../css/app.css';
 
-        const vuetify = createVuetify({
-          components,
-          directives,
-        })
+import { createApp, h, DefineComponent } from 'vue';
+import { createInertiaApp } from '@inertiajs/vue3';
+import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
+import { ZiggyVue } from '../../vendor/tightenco/ziggy/dist/vue.m';
+// Vuetify
+import 'vuetify/styles'
+import { createVuetify } from 'vuetify'
+import * as components from 'vuetify/components'
+import * as directives from 'vuetify/directives'
 
-        Y tambien debemos agregar el plugin Vuetify a la funcion createInertiaApp. De manera que la funcion createInertiaApp  nos debe de quedar asi: (eliminamos y agregamos)
-            createInertiaApp({
-                title: (title) => `${title} - ${appName}`,
-                resolve: (name) => resolvePageComponent(`./Pages/${name}.vue`, import.meta.glob<DefineComponent>('./Pages/**/*.vue')),
-                setup({ el, App, props, plugin }) {
-                    createApp({ render: () => h(App, props) })
-                        .use(plugin)
-                        .use(vuetify)
-                        .use(ZiggyVue, Ziggy)
-                        .mount(el);
-                },
-                progress: {
-                    color: '#4B5563',
-                },
-            });
+const vuetify = createVuetify({
+  components,
+  directives,
+})
+const appName = window.document.getElementsByTagName('title')[0]?.innerText || 'Laravel';
+
+createInertiaApp({
+    title: (title) => `${title} - ${appName}`,
+    resolve: (name) => resolvePageComponent(`./Pages/${name}.vue`, import.meta.glob<DefineComponent>('./Pages/**/*.vue')),
+    setup({ el, App, props, plugin }) {
+        createApp({ render: () => h(App, props) })
+            .use(plugin)
+            .use(vuetify)
+            .use(ZiggyVue, Ziggy)
+            .mount(el);
+    },
+    progress: {
+        color: '#4B5563',
+    },
+});
 
 
  - Ejecute el fichero limpiarCache.bat
@@ -56,6 +68,8 @@ Visualizacion y creacion de post.
  - Abra otro terminal y ejecute: php artisan serve
  - Ir a la ruta: http://localhost:8000/posts
 
+    
+    
 ** Consideraciones:
 - compose.json debe tener "Src\\": "src/"
     "autoload": {
@@ -102,9 +116,13 @@ Tenga en cuenta que al instalar las dependencias con composer, se han agregado l
 
 
 
-Entonces para ejecutar nuestros test en la carpeta 'src':
+Ejecutar nuestros test en la carpeta 'src':
 
-php artisan test --filter Unit y  php artisan test --filter PostApiControllerTest  Este ultimo correspondiente a 'Feature'
+ 
+php artisan test --filter Unit 
+ y  
+ php artisan test --filter PostApiControllerTest  
+ Este ultimo correspondiente a 'Feature'
 
 
 Swagger: 
