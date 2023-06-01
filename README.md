@@ -102,22 +102,38 @@ Visualizacion y creacion de post.
 ## 
 Desde la raiz de la instalacion Laravel, arranque la app con artisan: php artisan serve y se abrira por defecto el puerto 8000.
 Ademas ejecute tambien: npm run dev
-Rutas:
 
-    http://localhost:8000/posts
+ Rutas:
+ 
+ 
+ Web
 
-    API
+          http://localhost:8000/posts
+    
+ API
 
-    GET    http://localhost:8000/api/posts
+Solicitar todos los posts (GET):
 
-    GET    http://localhost:8000/api/posts/{id}
-
-    POST   http://localhost:8000/api/
+         http://localhost:8000/api/posts
 
 
-Invoke-WebRequest -Uri "http://127.0.0.1:8000/api/posts" -Method POST -Body '{userId: 1, title: Test title, body: Test body }' -Headers $headers
+Solicitar un post por id (GET):
 
-curl -d '{userId: 1, title: Test title, body: Test body }' -H "Content-Type: application/json" -X POST http://127.0.0.1:8000/api/posts
+         http://localhost:8000/api/posts/{id}
+ 
+ 
+Crear un post (POST):
+
+          http://localhost:8000/api/
+
+   
+
+Windows:
+
+     Invoke-WebRequest -Uri "http://127.0.0.1:8000/api/posts" -Method POST -Body '{userId: 1, title: Test title, body: Test body }' -Headers $headers
+ubuntu:
+
+     curl -d '{userId: 1, title: Test title, body: Test body }' -H "Content-Type: application/json" -X POST http://127.0.0.1:8000/api/posts
 
 
 
@@ -141,23 +157,30 @@ A tener en cuenta que para ello se debe tener instalado Sqlite.
 - Para ejecutar nuestros test del codigo que hemos aportado:
 
  
-        php artisan test --filter Unit 
+      php artisan test --filter Unit 
     
  y 
  
-        php artisan test --filter PostApiControllerTest
+     php artisan test --filter PostApiControllerTest
     
  Este ultimo correspondiente a 'Feature'
 
 
-Swagger: 
-Antes de generar el json de Swagger se recomienda primero ejecutar el fichero: limpiarCache.bat 
+ - Swagger: 
+Antes de generar el json de Swagger se recomienda primero ejecutar el fichero: 
+    limpiarCache.bat 
  y a continuacion ejecutar:
- php artisan l5-swagger:generate
+ 
+    php artisan l5-swagger:generate
 
- PhpStan
- ./vendor/bin/phpstan analyze src 
+  - PhpStan
+  
+        ./vendor/bin/phpstan analyze src 
+        
  He codificado hasta el --level=5 (Puedo codficar mas alto, pero no lo he realizado.)
+ 
+    ./vendor/bin/phpstan analyze src --level=5
+ 
 
 ## 
 Arquitectura Hexagonal con modelado del dominio DDD.
