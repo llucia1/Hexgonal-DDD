@@ -127,9 +127,7 @@ Solicitar un post por id (GET):
  
 Crear un post (POST):
 
-          http://localhost:8000/api/
-
-   
+          http://localhost:8000/api/posts
 
 Windows:
 
