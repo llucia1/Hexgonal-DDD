@@ -20,15 +20,15 @@ class BaseEloquentRepositories implements BaseRepoContract
 
     public function all(): array
     {
-        if (!empty($relations))
-            return $this->model->with($relations);
+        if (!empty($this->relations))
+            return $this->model->with($this->relations);
         return $this->model::all()->toArray();
     }
 
-    public function get( string $id )
+    public function get( string $id ): mixed
     {
-        if (!empty($relations))
-            return $this->model::where([ 'id' => $id ])->with($relations);
+        if (!empty($this->relations))
+            return $this->model::where([ 'id' => $id ])->with($this->relations);
         return $this->model::where([ 'id' => $id ]);
     }
     

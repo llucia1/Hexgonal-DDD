@@ -41,18 +41,18 @@ class BaseApiRepository implements BaseRepoContract
         return [];
     }
     
-    public function find( string $id): mixed
-    {
 
-    }
+    
+
+    
     public function persist( mixed $datas): void
     {
         echo 'Presistencia OK!';
     }
-    public function delete( mixed $datas): mixed
-    {
-
-    } 
+//    public function delete( mixed $datas): void
+//    {
+//
+//    } 
 
 
 

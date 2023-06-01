@@ -9,7 +9,7 @@ final class Geo
     {
     }
     
-    public static function fromArray(array $datos): ?self
+    public static function fromArray(?array $datos): ?self
     {
         if(!empty($datos))
         {

@@ -16,7 +16,7 @@ class PostsService
     {
     
        $posts = $this->postRepository->all();
-       if($posts === null)
+       if(empty($posts))
         return null;
 
        return $posts;

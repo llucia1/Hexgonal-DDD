@@ -8,13 +8,13 @@ final class User
     private ?Adress $address = null;
     private ?Company $company = null;
     public function __construct( private string $id, private string $name, private string $username, private string $email, 
-                                 array $address, private string $phone, private string $website, ?array $company )
+                                 ?array $address, private string $phone, private string $website, ?array $company )
     {
         $this->id = new Id($id);
         $this->name = new Stringvo($name);
         $this->username = new Stringvo($username);
         $this->email = Email::create($email)->email();
-        $this->address = Adress::fromArray($address) ;
+        $this->address = Adress::fromArray($address);
         $this->phone = new Stringvo($phone);
         $this->website = new Stringvo($website);
         $this->company = Company::fromArray($company);
@@ -60,11 +60,11 @@ final class User
         return $this->address;
     } 
 
-    public static function fromArray(array $datos): ?static
+    public static function fromArray(?array $datos): ?static
     {
         if(!empty($datos))
         {
-            return new static($datos['id'], $datos['name'], $datos['username'], $datos['email'], [], $datos['phone'], $datos['website'], []);
+            return new static($datos['id'], $datos['name'], $datos['username'], $datos['email'], $datos['address'], $datos['phone'], $datos['website'], $datos['company']);
         }
         return null;
     } 

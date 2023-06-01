@@ -16,7 +16,7 @@ final class Adress
         $this->geo = Geo::fromArray($geo);
     }
     
-    public static function fromArray(array $datos): ?self
+    public static function fromArray(?array $datos): ?self
     {
         if(!empty($datos))
         {

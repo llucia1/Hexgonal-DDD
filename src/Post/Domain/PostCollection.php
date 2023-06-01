@@ -6,7 +6,7 @@ class PostCollection
     private ?array $Posts;
     public function __construct( array $Posts  )
     {
-        $this->setPostFromArray($Posts);
+        $this->fromArray($Posts);
     }
 
     public function gets(): array
@@ -14,10 +14,10 @@ class PostCollection
         return $this->Posts;
     }
 
-    public function setPostFromArray(array $all): void
+    public function fromArray(array $all): void
     {
         foreach ($all as $post)
-            $this->Posts[] = Post::create($post);
+            $this->Posts[] = Post::fromArray($post);
     }
 
 }

@@ -1,0 +1,64 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API - Posts",
+        "description": "API for the consumption of the Post with User resources relations",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "https://localhost:8000",
+            "description": "API server - Local"
+        }
+    ],
+    "paths": {
+        "/api/posts/{id}": {
+            "get": {
+                "tags": [
+                    "posts"
+                ],
+                "summary": "Get one post by id",
+                "operationId": "getPostById",
+                "responses": {
+                    "200": {
+                        "description": "Successful response"
+                    }
+                }
+            }
+        },
+        "/api/posts": {
+            "post": {
+                "tags": [
+                    "posts"
+                ],
+                "summary": "Post one posts",
+                "operationId": "createPosts",
+                "responses": {
+                    "201": {
+                        "description": "Successful response"
+                    }
+                }
+            }
+        },
+        "/posts": {
+            "get": {
+                "tags": [
+                    "posts"
+                ],
+                "summary": "Get all posts",
+                "operationId": "getAllPosts",
+                "responses": {
+                    "200": {
+                        "description": "Successful response"
+                    }
+                }
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "post",
+            "description": "Posts Resource"
+        }
+    ]
+}

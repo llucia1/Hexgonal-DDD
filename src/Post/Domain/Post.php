@@ -15,6 +15,7 @@ final class Post
         $this->title = new Stringvo($title);
         $this->body = new Stringvo($body);
         $this->user = User::fromArray($user);
+
     }
 
     public function userId(): string
@@ -59,13 +60,23 @@ final class Post
         else
             $this->addUser(null);
     }
-
+    
     public static function create(array $datos): ?static
     {
         if( !empty($datos) )
         {
             $instance = new static($datos['userId'], $datos['id'], $datos['title'], $datos['body']);
             $instance->addUserFromArray($datos['user']);
+            return $instance;
+        }
+        return null;
+    }
+
+    public static function fromArray(?array $datos): ?static
+    {
+        if( !empty($datos) )
+        {
+            $instance = new static($datos['userId'], $datos['id'], $datos['title'], $datos['body'], $datos['user']);
             return $instance;
         }
         return null;

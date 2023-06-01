@@ -15,7 +15,7 @@ class PostQueryRepository extends baseApiRepository implements PostQueryRepoCont
         parent::__construct( 'posts', $relation );
     }
 
-    public function findOrFail(string $id): ?Post // El parametro puede ser tambien un Value Objet de id 
+    public function findOrFail(string $id): ?Post
     {
         if ($id == null)
         {
@@ -27,18 +27,18 @@ class PostQueryRepository extends baseApiRepository implements PostQueryRepoCont
         if (empty($result))// Sino encuentra valor retonoar null
             return null;
 
-        return Post::create($result);        
+        return Post::fromArray($result);        
     }
 
 
     public function all(): array
     {
         $result = $this->get('')->json();
-        if (empty($result)) // Validaciones que aceptamos por retorno o exceptions.
+        if (empty($result)) // Validaciones que aceptamos por retorno o exceptions. GUARDAS
             return [];
 
         $all = new PostCollection($result);
-        return $all->gets();// Aqui podemos retornar tambien el objeto Colletion. Puede tener beneficios en otros casos.
+        return $all->gets();
     }
 
 }
