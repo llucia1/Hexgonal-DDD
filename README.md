@@ -141,10 +141,11 @@ A tener en cuenta que para ello se debe tener instalado Sqlite.
 - Para ejecutar nuestros test del codigo que hemos aportado:
 
  
-    php artisan test --filter Unit 
+        php artisan test --filter Unit 
+    
  y 
  
-    php artisan test --filter PostApiControllerTest
+        php artisan test --filter PostApiControllerTest
     
  Este ultimo correspondiente a 'Feature'
 
