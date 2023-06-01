@@ -3,13 +3,60 @@ Visualizacion y creacion de post.
 
 ## Install
  - git clone https://github.com/llucia1/testip.git
+ - cd testip
+ - renombre el fichero .env.example por .env
  - composer install
- - npm install. Seleccione Vue, typescript y phpunit(nos agrega tailwind)
- - Ejecute el fichero limpiarCache.bat
- - Ejecutar en la linea de comandos de tu sistema: composer dump-autoload
- - npm run dev
+ - composer dump-autoload
+ - php artisan key:generate
+ - php artisan breeze:install 
+        * Seleccione o acepte instalar: Vue, typescript y phpunit(nos agrega tailwind) . El resto de opciones no instalar.
+ - npm install
 
-** Tenga en cuenta:
+ 
+
+
+ - Al instalar las dependencias nos han sobreescrito los ficheros 'routes/web.php' y 'resources/js/app.ts'
+    Editar routes/web.php
+        agregar la ruta:
+            Route::get('/posts', function () { return Inertia::render('posts'); });
+
+    Editar resources/js/app.ts
+        Agregar el siguiente codigo:
+
+            // Vuetify
+        import 'vuetify/styles'
+        import { createVuetify } from 'vuetify'
+        import * as components from 'vuetify/components'
+        import * as directives from 'vuetify/directives'
+
+        const vuetify = createVuetify({
+          components,
+          directives,
+        })
+
+        Y tambien debemos agregar el plugin Vuetify a la funcion createInertiaApp. De manera que la funcion createInertiaApp  nos debe de quedar asi: (eliminamos y agregamos)
+            createInertiaApp({
+                title: (title) => `${title} - ${appName}`,
+                resolve: (name) => resolvePageComponent(`./Pages/${name}.vue`, import.meta.glob<DefineComponent>('./Pages/**/*.vue')),
+                setup({ el, App, props, plugin }) {
+                    createApp({ render: () => h(App, props) })
+                        .use(plugin)
+                        .use(vuetify)
+                        .use(ZiggyVue, Ziggy)
+                        .mount(el);
+                },
+                progress: {
+                    color: '#4B5563',
+                },
+            });
+
+
+ - Ejecute el fichero limpiarCache.bat
+ - npm run dev
+ - Abra otro terminal y ejecute: php artisan serve
+ - Ir a la ruta: http://localhost:8000/posts
+
+** Consideraciones:
 - compose.json debe tener "Src\\": "src/"
     "autoload": {
         "psr-4": {
@@ -29,11 +76,11 @@ Visualizacion y creacion de post.
 
 
 ## 
-Desde la raiz de la instalacion Laravel, arranque la app con artisan: php artisan serve y se abrira por defecto el puerto 8000
- Ademas ejecute tambien: npm run dev
+Desde la raiz de la instalacion Laravel, arranque la app con artisan: php artisan serve y se abrira por defecto el puerto 8000.
+Ademas ejecute tambien: npm run dev
 Rutas:
 
-    http://localhost:8000
+    http://localhost:8000/posts
 
     API
 
@@ -60,14 +107,10 @@ Entonces para ejecutar nuestros test en la carpeta 'src':
 php artisan test --filter Unit y  php artisan test --filter PostApiControllerTest  Este ultimo correspondiente a 'Feature'
 
 
-
-
 Swagger: 
 Antes de generar el json de Swagger se recomienda primero ejecutar el fichero: limpiarCache.bat 
  y a continuacion ejecutar:
  php artisan l5-swagger:generate
-
-
 
  PhpStan
  ./vendor/bin/phpstan analyze src 
