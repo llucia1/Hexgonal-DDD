@@ -16,7 +16,7 @@ use Inertia\Inertia;
 |
 */
 
-Route::get('/', function () {
+Route::get('/posts', function () {
     return Inertia::render('posts');
 }); 
 
