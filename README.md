@@ -17,49 +17,59 @@ Visualizacion y creacion de post.
 
  - Al instalar las dependencias nos han sobreescrito los ficheros 'routes/web.php' y 'resources/js/app.ts'
  
-    Editar routes/web.php
+    Editar routes/web.php   
+    Agregar la ruta:
  
-        agregar la ruta:
+        
  
             Route::get('/posts', function () { return Inertia::render('posts'); });
  
 
     Editar resources/js/app.ts
-       Tenemos que importar las librerias de componentes Vuetify y debemos agregar el plugin Vuetify a la funcion createInertiaApp.
-       El fichero resources/js/app.ts nos debe de quedar de la siguiente forma que se muestra acontinuacion. Asi que Elimine ctr + Alt pulse supr para eliminar todo el code y copie y pegue lo siguiente:
+    
+    Tenemos que importar las librerias de componentes Vuetify y debemos agregar el plugin Vuetify a la funcion createInertiaApp.
+    
+    En el fichero resources/js/app.ts 
+    elimine todo el code (ctr + Alt   pulse   Supr para eliminar) y copie y pegue lo siguiente, para que nos quede como tal se muestra: 
+        
+        
 
-        import './bootstrap'; import '../css/app.css';
 
-import { createApp, h, DefineComponent } from 'vue';
-import { createInertiaApp } from '@inertiajs/vue3';
-import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
-import { ZiggyVue } from '../../vendor/tightenco/ziggy/dist/vue.m';
-// Vuetify
-import 'vuetify/styles'
-import { createVuetify } from 'vuetify'
-import * as components from 'vuetify/components'
-import * as directives from 'vuetify/directives'
 
-const vuetify = createVuetify({
-  components,
-  directives,
-})
-const appName = window.document.getElementsByTagName('title')[0]?.innerText || 'Laravel';
+        import './bootstrap'; 
+        import '../css/app.css'; 
+        import { createApp, h, DefineComponent } from 'vue';
+        import { createInertiaApp } from '@inertiajs/vue3';
+        import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
+        import { ZiggyVue } from '../../vendor/tightenco/ziggy/dist/vue.m';
+        // Vuetify
+        import 'vuetify/styles'
+        import { createVuetify } from 'vuetify'
+        import * as components from 'vuetify/components'
+        import * as directives from 'vuetify/directives'
+        
+        const vuetify = createVuetify({
+          components,
+          directives,
+        })
+        const appName = window.document.getElementsByTagName('title')[0]?.innerText || 'Laravel';
+        
+        createInertiaApp({
+            title: (title) => `${title} - ${appName}`,
+            resolve: (name) => resolvePageComponent(`./Pages/${name}.vue`, import.meta.glob<DefineComponent>('./Pages/**/*.vue')),
+            setup({ el, App, props, plugin }) {
+                createApp({ render: () => h(App, props) })
+                    .use(plugin)
+                    .use(vuetify)
+                    .use(ZiggyVue, Ziggy)
+                    .mount(el);
+            },
+            progress: {
+                color: '#4B5563',
+            },
+        });
 
-createInertiaApp({
-    title: (title) => `${title} - ${appName}`,
-    resolve: (name) => resolvePageComponent(`./Pages/${name}.vue`, import.meta.glob<DefineComponent>('./Pages/**/*.vue')),
-    setup({ el, App, props, plugin }) {
-        createApp({ render: () => h(App, props) })
-            .use(plugin)
-            .use(vuetify)
-            .use(ZiggyVue, Ziggy)
-            .mount(el);
-    },
-    progress: {
-        color: '#4B5563',
-    },
-});
+
 
 
 
@@ -110,18 +120,30 @@ Invoke-WebRequest -Uri "http://127.0.0.1:8000/api/posts" -Method POST -Body '{us
 curl -d '{userId: 1, title: Test title, body: Test body }' -H "Content-Type: application/json" -X POST http://127.0.0.1:8000/api/posts
 
 
-Test
-
-Tenga en cuenta que al instalar las dependencias con composer, se han agregado las librerias correspondientes. Asi que al ejecutar los test con: php artisan test se ejecutaran los test de dichas librerias. El phpunit esta configurado con sqlite, para no utilizar mysql.
 
 
+- Test
 
-Ejecutar nuestros test en la carpeta 'src':
+Tenga en cuenta que al instalar las dependencias con composer, se han agregado las librerias correspondientes. 
+Asi que al ejecutar los test:
+
+
+       php artisan test
+    
+    
+Se ejecutaran los test de dichas libreriastambien. 
+El phpunit.xml esta configurado con sqlite, para no utilizar mysql.
+
+
+
+Para ejecutar nuestros test en la carpeta 'src':
 
  
-php artisan test --filter Unit 
- y  
- php artisan test --filter PostApiControllerTest  
+    php artisan test --filter Unit 
+ y 
+ 
+    php artisan test --filter PostApiControllerTest
+    
  Este ultimo correspondiente a 'Feature'
 
 
