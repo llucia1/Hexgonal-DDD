@@ -33,7 +33,7 @@ Visualizacion y creacion de post.
     Tenemos que importar las librerias de componentes Vuetify y debemos agregar el plugin Vuetify a la funcion createInertiaApp.
     
     En el fichero resources/js/app.ts 
-    elimine todo el code (ctr + Alt   pulse   Supr para eliminar) y copie y pegue lo siguiente, para que nos quede como tal se muestra: 
+    elimine todo el code (ctr + A, tras la selecion elimine) y copie y pegue lo siguiente, para que nos quede como tal se muestra: 
         
         
 
