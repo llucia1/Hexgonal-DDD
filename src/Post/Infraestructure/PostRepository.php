@@ -26,8 +26,8 @@ class PostRepository extends baseApiRepository implements PostRepoContract
                         $this->model->body = $post->body();
                         $this->save($this->model);
             */
-            // Podemos crear una entidad Post del y devolverlo al dominio. Si creamos un servicio de dominio, 
-            // por ejemplo llamado 'new' o 'created', este serrvicio puede lanzar un evento o agregamos a un array de eventos para lanzalos 
+            // Podemos crear una entidad Post de dominio y devolverlo. Si creamos un servicio de dominio, 
+            // por ejemplo llamado 'new' o 'created', este serrvicio puede lanzar un evento o lo agregamos a un array de eventos para lanzalos 
             // cuando consideremos oportuno. Estos eventos pertenecen a negocio, es decir lo contendra el metodo del servicio de dominio.
         } catch (\Throwable $th) {
             throw new crearPostInBDException('Error when inserting a new Post in the Database.') ;
