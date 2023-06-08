@@ -1,5 +1,7 @@
-## Tests ipGlobal
-Visualizacion y creacion de post.
+## Hexagonal DDD
+Este codigo de ejemplo, sencillo basado en arquitectura hexagonal con modelado del dominio (DDD).
+Es una APi en apoyada en Laravel y un front que hace consumo de dicha APi en VUE.
+
 
 ## Install
  - git clone https://github.com/llucia1/testip.git
@@ -33,7 +35,7 @@ Visualizacion y creacion de post.
     Tenemos que importar las librerias de componentes Vuetify y debemos agregar el plugin Vuetify a la funcion createInertiaApp.
     
     En el fichero resources/js/app.ts 
-    elimine todo el code (ctr + A, tras la selecion elimine) y copie y pegue lo siguiente, para que nos quede como tal se muestra: 
+    elimine todo el codigo y sustituirlo por: 
         
         
 
@@ -136,31 +138,27 @@ ubuntu:
 
      curl -d '{userId: 1, title: Test title, body: Test body }' -H "Content-Type: application/json" -X POST http://127.0.0.1:8000/api/posts
 
-
+O si lo desea, utilice Postman.
 
 
 - Test
 
-Tenga en cuenta que al instalar las dependencias con composer, se han agregado las librerias correspondientes. 
-Asi que al ejecutar los test:
+Ejecutar test:
 
 
        php artisan test
     
     
-Se ejecutaran los test de dichas librerias tambien y se muestran errores de los test de dichas librerias. Es debidoa a que intentan acceder a la Base de datos. 
-Para testar la base de datos con Laravel como preferencia me gusta usar Sqlite en vez de mysql. 
-Teniendo un fichero para test con acceso a Sqlite tal y como esta configurado el phpunit.xml, y no utilizar mysql.
-A tener en cuenta que para ello se debe tener instalado Sqlite.
+Para testar la base de datos con Laravel como preferencia, se recomeinda tener instalado Sqlite.
+Sqlite nos evita escrituras y lecturas de la Base de datos ya sea MySql, Postgrest,etc 
+Por ello esta incluido el fichero database.sqlite y su correspondiente configuracion de Laravel (phpunit.xml, config/database.php)
 
-
-
-- Para ejecutar nuestros test del codigo que hemos aportado:
+- Test unitarios:
 
  
       php artisan test --filter Unit 
     
- y 
+ y de aceptacion o funcionales:
  
      php artisan test --filter PostApiControllerTest
     
@@ -178,7 +176,7 @@ Antes de generar el json de Swagger se recomienda primero ejecutar el fichero:
   
         ./vendor/bin/phpstan analyze src 
         
- He codificado hasta el --level=5 (Puedo codficar mas alto, pero no lo he realizado.)
+ He codificado en --level=5 
  
     ./vendor/bin/phpstan analyze src --level=5
  
@@ -189,14 +187,13 @@ Basado en Aplications Services.
 
 De cara al crecimiento de la aplicacion, se pueden envolver las aplications services en un commandBus con los beneficios que nos aportan. Por ejemplo, podemos ver sus beneficios en: https://tactician.thephpleague.com/
 
-Tampoco hay implementado un EventsBus, a pesar de que no se necesita por los requisitos solictados. Pero si es a tener en cuenta de cara al crecimeinto.
+Se ha creado un manejador de Exceptions, para control sobre ellas. Puede verlo en 'app/exceptions'
+Cuando se lanza una exception se puede redirecionar a pagina de error, o un componente vue o donde se vea conveniente.
 
-He creado un manejador de Exceptions, teniendo un control sobre ellas. Cuando se lanza una exception se puede redirecionar a pagina de error, o un componente vue o donde se vea conveniente.
+En cuanto al Front, se hace un consumo directo con la API con axios. 
 
-En cuanto al Front, no he creado una factoria para consumir la APi, sino que directamente sobre la url con axios. Ni tampoco un arbol de componentes vue.
-La paginacion tampoco he tenido en cuenta la solicitud 
-
-Organice el codigo como consideres necesario. Pudiendo tener un servicio para Backend y otro para Front, haciendo solicitudes para el consumo de la API.
+El codigo de la aplicacion esta desacoplado del framework. Por lo cual te permite instalar cualquier versin de LAravel a partir de la 8, al estar en PHP8
+Organice el codigo como consideres necesario. Pudiendo tener un servicio para Backend y otro para Front.
 
 
 
