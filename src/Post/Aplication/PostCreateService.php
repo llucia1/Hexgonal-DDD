@@ -21,11 +21,11 @@ final class PostCreateService
        if($user === null)
         throw new crearPostInBDException('The user does not exist. We cannot insert post in database.') ;
 
-       $uuid = $this->uuid();// Creamos el uuid. Pero se puede crear desde infraestructura con otro metodo llamado create, por ejemplo. A continuacion,
-                             // podemos tener un servicio de dominio, que sea para cuando se crea un nuevo Post y este puede asociar un listern o incluso puede disparar un Event(Depende de la decision que se quiera tomar).
+       $uuid = $this->uuid();
+       
        $this->postRepository->save( new Post( $datas['userId'], $uuid, $datas['title'], $datas['body']  ));
 
-       return $uuid;// Este retorno es discutible ...   
+       return $uuid;   
     }
 
     public function uuid(): string
