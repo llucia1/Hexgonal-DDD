@@ -24,7 +24,7 @@ class PostQueryRepository extends baseApiRepository implements PostQueryRepoCont
 
         $result = $this->get($id)->json();
 
-        if (empty($result))// Sino encuentra valor retonoar null
+        if (empty($result))
             return null;
 
         return Post::fromArray($result);        
